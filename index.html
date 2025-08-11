@@ -201,7 +201,11 @@
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card {
+                padding: 0.5rem;
             }
 
             .stat-number {
@@ -209,13 +213,11 @@
             }
 
             .container {
-                padding: 0 15px;
+                padding: 0 0px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .tool-content {
+                padding: 1rem;
             }
         }
     </style>
@@ -431,24 +433,6 @@
         // Initialize the counter when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             new ChineseCharacterCounter();
-        });
-
-        // Add some sample text for demonstration
-        window.addEventListener('load', () => {
-            const sampleText = `欢迎使用中文字符计数器！Welcome to the Chinese Character Counter!
-
-这个工具可以帮助您统计文本中的中文字符数量。This tool helps you count Chinese characters in your text.
-
-功能包括：Features include:
-- 中文字符统计 Chinese character counting
-- 英文单词计数 English word counting  
-- 实时分析 Real-time analysis
-- 多语言支持 Multilingual support
-
-请在上方文本框中输入您的内容开始分析。Please enter your content in the text box above to start analysis.`;
-
-            // Optional: Uncomment the next line to add sample text on load
-            // document.getElementById('textInput').value = sampleText;
         });
     </script>
 
