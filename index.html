@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Character Counter - Count Chinese Characters Online</title>
+    <meta name="description" content="Free online Chinese character counter tool. Count Chinese characters, English words, spaces, and total character count in text.">
+    <meta name="keywords" content="chinese character counter, chinese text counter, word count, count chinese, text statistics">
+    <meta name="author" content="Chinese Character Counter">
+    <meta property="og:title" content="Chinese Character Counter - Free Online Text Analysis Tool">
+    <meta property="og:description" content="Free online Chinese character counter tool. Count Chinese characters, English words, spaces, and total character count in text.">
+    <meta property="og:type" content="website">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3737189245877678"
+     crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main Tool Area */
+        .tool-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .tool-header h2 {
+            color: #495057;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-content {
+            padding: 2rem;
+        }
+
+        .textarea-container {
+            margin-bottom: 2rem;
+        }
+
+        #textInput {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        #textInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* SEO Content Section */
+        .content-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .content-section h2 {
+            color: #495057;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section h3 {
+            color: #495057;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #6c757d;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            color: #6c757d;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        /* Footer */
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Chinese Character Counter</h1>
+            <p class="subtitle">Free online tool to count Chinese characters, English words, and analyze your text</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tool-section">
+            <div class="tool-header">
+                <h2>Text Analysis Tool</h2>
+                <p>Paste your text below to get instant character and word count statistics</p>
+            </div>
+            <div class="tool-content">
+                <div class="textarea-container">
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Enter or paste your text here to analyze Chinese characters, English words, and other text statistics..."
+                        aria-label="Text input for character counting"
+                    ></textarea>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="chineseCount">0</span>
+                        <span class="stat-label">Chinese Characters</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="englishCount">0</span>
+                        <span class="stat-label">English Characters</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="wordCount">0</span>
+                        <span class="stat-label">English Words</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="spaceCount">0</span>
+                        <span class="stat-label">Spaces</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalCount">0</span>
+                        <span class="stat-label">Total Characters</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>What is a Chinese Character Counter?</h2>
+            <p>A Chinese character counter is a specialized text analysis tool designed to accurately count and analyze different types of characters in multilingual text. Unlike standard character counters, our tool specifically distinguishes between Chinese characters (汉字) and other text elements, providing detailed statistics for mixed-language content.</p>
+            
+            <h3>Key Features of Our Chinese Character Counter</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>Chinese Character Detection:</strong> Accurately identifies and counts Chinese characters (汉字), including traditional and simplified forms.
+                </div>
+                <div class="feature-item">
+                    <strong>English Word Count:</strong> Counts English words separated by spaces, excluding punctuation from word boundaries.
+                </div>
+                <div class="feature-item">
+                    <strong>Real-time Analysis:</strong> Instant counting as you type, with optimized debouncing for smooth performance.
+                </div>
+                <div class="feature-item">
+                    <strong>Multiple Text Statistics:</strong> Comprehensive analysis including spaces, total characters, and language-specific counts.
+                </div>
+            </div>
+
+            <h3>How Does Chinese Character Counting Work?</h3>
+            <p>Our Chinese character counter uses Unicode character range detection to identify Chinese characters. The tool specifically looks for characters in the following Unicode ranges:</p>
+            <ul>
+                <li><strong>CJK Unified Ideographs (U+4E00-U+9FFF):</strong> The main block containing most commonly used Chinese characters</li>
+                <li><strong>CJK Extension A (U+3400-U+4DBF):</strong> Additional Chinese characters and variants</li>
+                <li><strong>CJK Extension B and beyond:</strong> Rare and historical Chinese characters</li>
+                <li><strong>CJK Compatibility (U+F900-U+FAFF):</strong> Compatibility characters for legacy systems</li>
+            </ul>
+
+            <h3>Why Use a Specialized Chinese Character Counter?</h3>
+            <p>Standard text analysis tools often fail to properly categorize Chinese text because they treat all characters equally. Our specialized counter provides several advantages:</p>
+            <ul>
+                <li><strong>Accurate Language Separation:</strong> Distinguishes between Chinese characters and other writing systems</li>
+                <li><strong>Punctuation Exclusion:</strong> Ignores punctuation marks when counting meaningful characters</li>
+                <li><strong>Mixed Content Analysis:</strong> Perfect for bilingual documents combining Chinese and English</li>
+                <li><strong>SEO and Content Planning:</strong> Essential for content creators working with Chinese text</li>
+            </ul>
+
+            <h3>Common Use Cases for Chinese Character Counting</h3>
+            <p>Our Chinese character counter tool is valuable for various applications:</p>
+            <ul>
+                <li><strong>Academic Writing:</strong> Students and researchers analyzing Chinese literature or language studies</li>
+                <li><strong>Translation Services:</strong> Professional translators calculating character counts for pricing and project estimation</li>
+                <li><strong>Content Creation:</strong> Bloggers and content creators optimizing Chinese content for SEO and readability</li>
+                <li><strong>Social Media Management:</strong> Managing character limits on platforms with specific Chinese character restrictions</li>
+                <li><strong>Educational Purposes:</strong> Teachers and students analyzing text complexity and character usage patterns</li>
+            </ul>
+
+            <h3>Understanding the Results</h3>
+            <p>When you use our Chinese character counter, you'll receive five key metrics:</p>
+            <ul>
+                <li><strong>Chinese Characters:</strong> Count of Han characters (汉字) excluding punctuation</li>
+                <li><strong>English Characters:</strong> Latin alphabet characters (A-Z, a-z) excluding spaces and punctuation</li>
+                <li><strong>English Words:</strong> Word count based on space separation, useful for bilingual content</li>
+                <li><strong>Spaces:</strong> Total number of space characters, important for formatting analysis</li>
+                <li><strong>Total Characters:</strong> Complete character count including all text elements</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Chinese Character Counter. Free online text analysis tool for multilingual content.</p>
+        </div>
+    </footer>
+
+    <script>
+        class ChineseCharacterCounter {
+            constructor() {
+                this.textInput = document.getElementById('textInput');
+                this.chineseCount = document.getElementById('chineseCount');
+                this.englishCount = document.getElementById('englishCount');
+                this.wordCount = document.getElementById('wordCount');
+                this.spaceCount = document.getElementById('spaceCount');
+                this.totalCount = document.getElementById('totalCount');
+                
+                this.debounceTimer = null;
+                this.debounceDelay = 300; // 300ms debounce
+                
+                this.init();
+            }
+
+            init() {
+                this.textInput.addEventListener('input', () => {
+                    this.debouncedCount();
+                });
+                
+                // Initial count
+                this.countCharacters();
+            }
+
+            debouncedCount() {
+                clearTimeout(this.debounceTimer);
+                this.debounceTimer = setTimeout(() => {
+                    this.countCharacters();
+                }, this.debounceDelay);
+            }
+
+            countCharacters() {
+                const text = this.textInput.value;
+                
+                // Count Chinese characters (CJK Unified Ideographs)
+                const chineseRegex = /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g;
+                const chineseMatches = text.match(chineseRegex) || [];
+                const chineseCharCount = chineseMatches.length;
+
+                // Count English characters (A-Z, a-z)
+                const englishRegex = /[a-zA-Z]/g;
+                const englishMatches = text.match(englishRegex) || [];
+                const englishCharCount = englishMatches.length;
+
+                // Count English words (sequences of English characters)
+                const wordRegex = /\b[a-zA-Z]+\b/g;
+                const wordMatches = text.match(wordRegex) || [];
+                const englishWordCount = wordMatches.length;
+
+                // Count spaces
+                const spaceRegex = /\s/g;
+                const spaceMatches = text.match(spaceRegex) || [];
+                const spaceCharCount = spaceMatches.length;
+
+                // Total character count
+                const totalCharCount = text.length;
+
+                // Update display with animation
+                this.animateCount(this.chineseCount, chineseCharCount);
+                this.animateCount(this.englishCount, englishCharCount);
+                this.animateCount(this.wordCount, englishWordCount);
+                this.animateCount(this.spaceCount, spaceCharCount);
+                this.animateCount(this.totalCount, totalCharCount);
+            }
+
+            animateCount(element, targetValue) {
+                const currentValue = parseInt(element.textContent) || 0;
+                const increment = targetValue > currentValue ? 1 : -1;
+                const steps = Math.abs(targetValue - currentValue);
+                
+                if (steps === 0) return;
+                
+                let current = currentValue;
+                const stepTime = Math.min(50, 200 / steps);
+                
+                const updateValue = () => {
+                    current += increment;
+                    element.textContent = current.toLocaleString();
+                    
+                    if (current !== targetValue) {
+                        setTimeout(updateValue, stepTime);
+                    }
+                };
+                
+                if (steps <= 20) {
+                    updateValue();
+                } else {
+                    // For large differences, just set the value directly
+                    element.textContent = targetValue.toLocaleString();
+                }
+            }
+        }
+
+        // Initialize the counter when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChineseCharacterCounter();
+        });
+
+        // Add some sample text for demonstration
+        window.addEventListener('load', () => {
+            const sampleText = `欢迎使用中文字符计数器！Welcome to the Chinese Character Counter!
+
+这个工具可以帮助您统计文本中的中文字符数量。This tool helps you count Chinese characters in your text.
+
+功能包括：Features include:
+- 中文字符统计 Chinese character counting
+- 英文单词计数 English word counting  
+- 实时分析 Real-time analysis
+- 多语言支持 Multilingual support
+
+请在上方文本框中输入您的内容开始分析。Please enter your content in the text box above to start analysis.`;
+
+            // Optional: Uncomment the next line to add sample text on load
+            // document.getElementById('textInput').value = sampleText;
+        });
+    </script>
+</body>
+</html>
