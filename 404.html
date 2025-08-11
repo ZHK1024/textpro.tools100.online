@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Chinese Character Counter</title>
+    <meta name="description" content="Page not found. You will be redirected to the Chinese Character Counter tool homepage in 3 seconds.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333333;
+            text-align: center;
+        }
+
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #667eea;
+            text-shadow: none;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .redirect-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid #e9ecef;
+            color: #495057;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            display: inline-block;
+            margin: 0 0.5rem;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: #5a67d8;
+            border-color: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: progress 3s linear forwards;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            left: 85%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            animation-delay: 4s;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-message {
+                font-size: 1.1rem;
+            }
+
+            .countdown {
+                font-size: 2.5rem;
+            }
+
+            .error-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .countdown {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            Oops! The page you're looking for doesn't exist.<br>
+            But don't worry, our Chinese Character Counter tool is still here to help you!
+        </p>
+        
+        <div class="redirect-info">
+            <p>Redirecting to homepage in <span class="countdown" id="countdown">3</span> seconds...</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <a href="/" class="btn-home" id="homeBtn">Go to Chinese Character Counter →</a>
+    </div>
+
+    <script>
+        class RedirectHandler {
+            constructor() {
+                this.countdownElement = document.getElementById('countdown');
+                this.homeBtn = document.getElementById('homeBtn');
+                this.remainingTime = 3;
+                
+                this.init();
+            }
+
+            init() {
+                // Start countdown
+                this.startCountdown();
+                
+                // Add click event to button
+                this.homeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.redirectToHome();
+                });
+
+                // Add keyboard event for accessibility
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        this.redirectToHome();
+                    }
+                });
+            }
+
+            startCountdown() {
+                const interval = setInterval(() => {
+                    this.remainingTime--;
+                    this.countdownElement.textContent = this.remainingTime;
+                    
+                    if (this.remainingTime <= 0) {
+                        clearInterval(interval);
+                        this.redirectToHome();
+                    }
+                }, 1000);
+            }
+
+            redirectToHome() {
+                // Try multiple possible home URLs
+                const possibleHomes = [
+                    '/',
+                    '/index.html',
+                    'index.html',
+                    '../index.html'
+                ];
+
+                // Check if we can determine the correct path
+                const currentPath = window.location.pathname;
+                let homePath = '/';
+
+                // If we're in a subdirectory, adjust the path
+                if (currentPath.includes('/')) {
+                    const pathParts = currentPath.split('/');
+                    if (pathParts.length > 2) {
+                        homePath = '../index.html';
+                    }
+                }
+
+                // Redirect with a smooth transition
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    window.location.href = homePath;
+                }, 500);
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new RedirectHandler();
+        });
+
+        // Analytics tracking (if needed)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: '404 - Page Not Found',
+                page_location: window.location.href
+            });
+        }
+
+        // Console message for developers
+        console.log('🔍 404 Error: Page not found');
+        console.log('📝 Redirecting to Chinese Character Counter tool...');
+        console.log('🌐 Site: textpro.tools100.online');
+    </script>
+</body>
+</html>
