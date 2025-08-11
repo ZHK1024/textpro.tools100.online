@@ -1,0 +1,37 @@
+# Robots.txt for Chinese Character Counter Tool
+# Website: textpro.tools100.online
+
+User-agent: *
+Allow: /
+
+# Allow access to main pages
+Allow: /index.html
+Allow: /sitemap.xml
+
+# Disallow access to 404 page (prevent indexing)
+Disallow: /404.html
+
+# Allow common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://textpro.tools100.online/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
