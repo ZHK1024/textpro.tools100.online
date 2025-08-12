@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many Chinese Characters Do You Know? - Chinese Character Recognition Test</title>
+    <meta name="description" content="Test your Chinese character knowledge with our interactive recognition quiz. Challenge yourself with common Chinese characters and see how many you really know.">
+    <meta name="keywords" content="chinese character test, how many chinese characters do you know,recognition, hanzi test, chinese quiz">
+    <meta name="author" content="Chinese Character Test">
+    <meta property="og:title" content="How Many Chinese Characters Do You Know? - Test Your Knowledge">
+    <meta property="og:description" content="Test your Chinese character knowledge with our interactive recognition quiz. Challenge yourself with common Chinese characters and see how many you really know.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://textpro.tools100.online/chinese-charactars-test.html">
+    <meta property="twitter:title" content="How Many Chinese Characters Do You Know? - Test Your Knowledge">
+    <meta property="twitter:description" content="Test your Chinese character knowledge with our interactive recognition quiz. Challenge yourself with common Chinese characters and see how many you really know.">
+    <meta property="twitter:site" content="https://textpro.tools100.online/">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3737189245877678"
+     crossorigin="anonymous"></script>
+    <script src="characters.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #343a40;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Test Section */
+        .test-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .test-header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+        }
+
+        .stats-display {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Character Display */
+        .character-display {
+            padding: 1rem 2rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chinese-character {
+            font-size: 8rem;
+            line-height: 8rem;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 1rem;
+            font-family: 'SimSun', '宋体', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .character-pinyin {
+            font-size: 3.5rem;
+            color: opaque;
+            margin-bottom: 0rem;
+            opacity: 0;
+        }
+
+        .character-pinyin.show {
+            opacity: 1;
+        }
+
+        .character-pinyin.unknown {
+            color: #dc3545;
+        }
+
+        .chinese-character.unknown {
+            color: #dc3545;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-unknown {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+        }
+
+        .btn-known {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+        }
+
+        /* Start/Result Screen */
+        .start-screen, .result-screen {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .start-btn, .restart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .start-btn:hover, .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .result-stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .result-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Content Section */
+        .content-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .content-section h2 {
+            color: #495057;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #343a40;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section h3 {
+            color: #495057;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #6c757d;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            color: #6c757d;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: #e3f2fd;
+            color: #1976d2;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #bbdefb;
+            margin-bottom: 1rem;
+        }
+
+        .back-link:hover {
+            background: #bbdefb;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #41484e;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .chinese-character {
+                font-size: 6rem;
+            }
+
+            .action-buttons {
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .action-btn {
+                min-width: 120px;
+                padding: 1rem 1.5rem;
+            }
+
+            .stats-display {
+                gap: 1rem;
+            }
+
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>How Many Chinese Characters Do You Know?</h1>
+            <p class="subtitle">Test your knowledge of Chinese characters with our interactive recognition quiz</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="test-section">
+            <!-- Start Screen -->
+            <div id="startScreen" class="start-screen">
+                <h2>Ready to Test Your Chinese Character Knowledge?</h2>
+                <p>We'll show you 100 randomly selected Chinese characters from our database of 3,500 common characters. Simply click whether you recognize each character or not. Be honest - it's more fun that way!</p>
+                <button id="startBtn" class="start-btn">Start Test</button>
+            </div>
+
+            <!-- Test Interface -->
+            <div id="testInterface" class="test-interface" style="display: none;">
+                <div class="test-header">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <div class="stats-display">
+                        <div class="stat-item">
+                            <div id="currentIndex" class="stat-number">1</div>
+                            <div class="stat-label">Current</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="totalCount" class="stat-number">100</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="knownCount" class="stat-number">0</div>
+                            <div class="stat-label">Known</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character-display">
+                    <div id="characterPinyin" class="character-pinyin"></div>
+                    <div id="currentCharacter" class="chinese-character"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="unknownBtn" class="action-btn btn-unknown">
+                        <!-- <span class="btn-icon">❌</span> -->
+                        <span>Don't Know</span>
+                    </button>
+                    <button id="knownBtn" class="action-btn btn-known">
+                        <!-- <span class="btn-icon">✅</span> -->
+                        <span>I Know It</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="resultScreen" class="result-screen" style="display: none;">
+                <h2>Test Complete!</h2>
+                <p>Here's how you did on the Chinese character recognition test:</p>
+                
+                <div class="result-stats">
+                    <div class="result-stat-card">
+                        <div id="finalKnown" class="result-stat-number">0</div>
+                        <div class="result-stat-label">Characters Known</div>
+                    </div>
+                    <div class="result-stat-card">
+                        <div id="finalUnknown" class="result-stat-number">0</div>
+                        <div class="result-stat-label">Characters Unknown</div>
+                    </div>
+                    <div class="result-stat-card">
+                        <div id="accuracyRate" class="result-stat-number">0%</div>
+                        <div class="result-stat-label">Recognition Rate</div>
+                    </div>
+                </div>
+
+                <button id="restartBtn" class="restart-btn">Take Test Again</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+
+            <h2>How Many Chinese Characters Do You Know? - Test Your Knowledge</h2>
+            <p>Welcome to our comprehensive Chinese character recognition test! This advanced tool draws from a database of 3,500 common Chinese characters and presents you with 100 randomly selected characters to test your knowledge. Whether you're a beginner learning Chinese or an advanced student, this test will give you valuable insights into your character recognition abilities.</p>
+            
+            <h3>How Our Advanced Chinese Character Recognition Test Works</h3>
+            <p>Our test uses a sophisticated system that randomly selects 100 characters from our curated database of 3,500 most common Chinese characters. Here's how it works:</p>
+            <ul>
+                <li><strong>Random Selection:</strong> Each test presents 100 different characters randomly chosen from 3,500 common characters</li>
+                <li><strong>Large Character Display:</strong> Each Chinese character is displayed clearly in large text for easy recognition</li>
+                <li><strong>Two Choices:</strong> Click "I Know It" ✅ if you recognize the character, or "Don't Know" ❌ if you don't</li>
+                <li><strong>Honest Assessment:</strong> Be truthful with your answers - the test is most valuable when you're honest about your knowledge</li>
+                <li><strong>Pronunciation Reveal:</strong> If you click "Don't Know", we'll show you the pinyin pronunciation for 3 seconds before moving on</li>
+                <li><strong>Comprehensive Results:</strong> Get detailed feedback on your Chinese character recognition rate out of 100 characters</li>
+                <li><strong>Fresh Content:</strong> Every test is different, with new random characters selected each time</li>
+            </ul>
+
+            <h3>Why Test Your Chinese Character Knowledge?</h3>
+            <p>Understanding how many Chinese characters you know is crucial for several reasons:</p>
+            <ul>
+                <li><strong>Learning Progress:</strong> Track your improvement in Chinese character recognition over time</li>
+                <li><strong>Study Planning:</strong> Identify gaps in your knowledge to focus your study efforts</li>
+                <li><strong>Confidence Building:</strong> Discover you know more characters than you thought!</li>
+                <li><strong>Practical Assessment:</strong> Get a realistic measure of your reading ability in Chinese</li>
+                <li><strong>Motivation:</strong> Set goals for expanding your character vocabulary</li>
+            </ul>
+
+            <h3>Our Database of 3,500 Common Chinese Characters</h3>
+            <p>Our test features carefully curated common Chinese characters from a comprehensive database of 3,500 characters. These characters are selected based on:</p>
+            <ul>
+                <li><strong>Frequency of Use:</strong> Characters that appear most often in modern Chinese texts</li>
+                <li><strong>HSK Standards:</strong> Characters from all levels of the standardized Chinese proficiency tests</li>
+                <li><strong>Educational Curricula:</strong> Characters taught in Chinese language programs worldwide</li>
+                <li><strong>Daily Communication:</strong> Essential characters for reading newspapers, books, and digital content</li>
+                <li><strong>Academic Requirements:</strong> Characters needed for academic and professional Chinese literacy</li>
+            </ul>
+
+            <h3>Why Test 100 Characters from 3,500?</h3>
+            <p>Testing 100 randomly selected characters from our database of 3,500 provides several advantages:</p>
+            <ul>
+                <li><strong>Statistical Accuracy:</strong> 100 characters provide a statistically meaningful sample of your knowledge</li>
+                <li><strong>Manageable Duration:</strong> The test takes 10-15 minutes, making it convenient yet comprehensive</li>
+                <li><strong>Varied Difficulty:</strong> Random selection ensures a mix of easy and challenging characters</li>
+                <li><strong>Replayability:</strong> Each test is unique, allowing you to track progress over time</li>
+                <li><strong>Representative Sample:</strong> Results accurately reflect your knowledge of the 3,500 character set</li>
+            </ul>
+
+            <h3>Understanding Your Test Results</h3>
+            <p>After completing the 100-character test, you'll receive detailed statistics about your Chinese character knowledge:</p>
+            <ul>
+                <li><strong>Characters Known:</strong> Total number of characters you recognized out of 100</li>
+                <li><strong>Characters Unknown:</strong> Characters you haven't learned yet</li>
+                <li><strong>Recognition Rate:</strong> Percentage of characters you know, providing insight into your overall knowledge of the 3,500 character database</li>
+                <li><strong>Estimated Total Knowledge:</strong> Based on your results, we can estimate how many of the full 3,500 characters you might know</li>
+                <li><strong>Learning Opportunities:</strong> Clear indication of your progress and areas for improvement</li>
+            </ul>
+
+            <h3>Interpreting Your Score: What Does It Mean?</h3>
+            <p>Your score on this 100-character test can help you understand your Chinese literacy level:</p>
+            <ul>
+                <li><strong>90-100 characters known:</strong> Excellent! You have strong Chinese character recognition skills</li>
+                <li><strong>70-89 characters known:</strong> Very good! You have solid intermediate to advanced knowledge</li>
+                <li><strong>50-69 characters known:</strong> Good progress! You're developing solid foundational knowledge</li>
+                <li><strong>30-49 characters known:</strong> Keep going! You're building your character vocabulary</li>
+                <li><strong>10-29 characters known:</strong> Great start! Continue practicing to expand your knowledge</li>
+                <li><strong>0-9 characters known:</strong> Perfect starting point! There's so much to discover</li>
+            </ul>
+
+            <h3>Tips for Improving Your Chinese Character Recognition</h3>
+            <p>Based on your test results, here are some strategies to expand your character knowledge:</p>
+            <ul>
+                <li><strong>Regular Practice:</strong> Use spaced repetition systems to practice character recognition daily</li>
+                <li><strong>Context Learning:</strong> Learn characters in context rather than in isolation</li>
+                <li><strong>Stroke Order:</strong> Practice writing characters to improve recognition and memory</li>
+                <li><strong>Radical Recognition:</strong> Learn common radicals to help recognize unfamiliar characters</li>
+                <li><strong>Reading Practice:</strong> Read Chinese texts at your level to encounter characters naturally</li>
+                <li><strong>Regular Testing:</strong> Retake this test periodically to track your progress</li>
+            </ul>
+
+            <h3>How Many Chinese Characters Should You Know?</h3>
+            <p>The number of Chinese characters you should know depends on your learning goals. Here's how our 3,500-character database relates to different proficiency levels:</p>
+            <ul>
+                <li><strong>Basic Literacy (1,000-1,500 characters):</strong> If you recognize 30-40 characters in our test, you're likely approaching basic literacy</li>
+                <li><strong>Intermediate Level (2,000-2,500 characters):</strong> Recognizing 50-70 characters suggests solid intermediate knowledge</li>
+                <li><strong>Advanced Level (3,000+ characters):</strong> Recognizing 80+ characters indicates advanced Chinese literacy</li>
+                <li><strong>Native-like Proficiency (3,500+ characters):</strong> Recognizing 90+ characters shows near-native character recognition</li>
+            </ul>
+
+            <p>Remember, this test provides a snapshot of your character recognition ability. Since we test 100 characters from 3,500, your results give you a good indication of your overall knowledge. Take the test multiple times to track your progress as you continue learning Chinese!</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Chinese Character Test. Free online tool to test your Chinese character recognition ability.</p>
+        </div>
+    </footer>
+
+    <script>
+        class ChineseCharacterTest {
+            constructor() {
+                // Test data will be loaded from external script
+                this.characters = [];
+                this.testSize = 100; // Test 100 characters from 3500 common ones
+
+                // Test state
+                this.currentIndex = 0;
+                this.knownCount = 0;
+                this.unknownCount = 0;
+                this.isTestActive = false;
+                this.showingPinyin = false;
+
+                // DOM elements
+                this.startScreen = document.getElementById('startScreen');
+                this.testInterface = document.getElementById('testInterface');
+                this.resultScreen = document.getElementById('resultScreen');
+                this.currentCharacter = document.getElementById('currentCharacter');
+                this.characterPinyin = document.getElementById('characterPinyin');
+                this.progressFill = document.getElementById('progressFill');
+                this.currentIndexEl = document.getElementById('currentIndex');
+                this.totalCountEl = document.getElementById('totalCount');
+                this.knownCountEl = document.getElementById('knownCount');
+
+                this.init();
+            }
+
+            init() {
+                // Check if external character data is available
+                if (typeof window.ChineseCharacters === 'undefined') {
+                    console.error('Chinese character data not loaded. Please ensure characters.js is included.');
+                    // Fallback to small test set
+                    this.characters = [
+                        { char: '我', pinyin: 'wǒ' },
+                        { char: '你', pinyin: 'nǐ' },
+                        { char: '他', pinyin: 'tā' },
+                        { char: '是', pinyin: 'shì' },
+                        { char: '不', pinyin: 'bù' },
+                        { char: '在', pinyin: 'zài' },
+                        { char: '有', pinyin: 'yǒu' },
+                        { char: '这', pinyin: 'zhè' },
+                        { char: '个', pinyin: 'gè' },
+                        { char: '中', pinyin: 'zhōng' }
+                    ];
+                    this.testSize = this.characters.length;
+                } else {
+                    // Load random characters from the external dataset
+                    const rawData = window.ChineseCharacters.getRandomCharacters(this.testSize);
+                    this.characters = this.convertDataFormat(rawData);
+                }
+
+                // Set total count in UI
+                this.totalCountEl.textContent = this.testSize;
+
+                // Event listeners
+                document.getElementById('startBtn').addEventListener('click', () => this.startTest());
+                document.getElementById('unknownBtn').addEventListener('click', () => this.markUnknown());
+                document.getElementById('knownBtn').addEventListener('click', () => this.markKnown());
+                document.getElementById('restartBtn').addEventListener('click', () => this.restartTest());
+
+                // Keyboard support
+                document.addEventListener('keydown', (e) => {
+                    if (!this.isTestActive || this.showingPinyin) return;
+                    
+                    if (e.key === 'ArrowLeft' || e.key === '1') {
+                        this.markUnknown();
+                    } else if (e.key === 'ArrowRight' || e.key === '2') {
+                        this.markKnown();
+                    }
+                });
+            }
+
+            // Convert data format from [{"中":"zhong"}] to [{char: "中", pinyin: "zhong"}]
+            convertDataFormat(rawData) {
+                return rawData.map(item => {
+                    const char = Object.keys(item)[0];
+                    const pinyin = item[char];
+                    return { char, pinyin };
+                });
+            }
+
+            startTest() {
+                this.currentIndex = 0;
+                this.knownCount = 0;
+                this.unknownCount = 0;
+                this.isTestActive = true;
+                this.showingPinyin = false;
+
+                // Load fresh random characters if external data is available
+                if (typeof window.ChineseCharacters !== 'undefined') {
+                    const rawData = window.ChineseCharacters.getRandomCharacters(this.testSize);
+                    this.characters = this.convertDataFormat(rawData);
+                } else {
+                    // Shuffle fallback characters for random order
+                    this.shuffleArray(this.characters);
+                }
+
+                this.startScreen.style.display = 'none';
+                this.resultScreen.style.display = 'none';
+                this.testInterface.style.display = 'block';
+
+                // Reset the display elements
+                this.characterPinyin.classList.remove('show');
+                this.currentCharacter.classList.remove('unknown');
+                this.characterPinyin.classList.remove('unknown');
+                this.knownCountEl.textContent = '0';
+
+                this.showCurrentCharacter();
+                this.updateProgress();
+            }
+
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            showCurrentCharacter() {
+                if (this.currentIndex >= this.characters.length) {
+                    this.showResults();
+                    return;
+                }
+
+                // First hide pinyin and reset colors
+                this.characterPinyin.classList.remove('show');
+                this.currentCharacter.classList.remove('unknown');
+                this.characterPinyin.classList.remove('unknown');
+                const character = this.characters[this.currentIndex];
+                    
+                // Update character and pinyin content
+                this.currentCharacter.textContent = character.char;
+                this.characterPinyin.textContent = character.pinyin;
+                
+                this.currentIndexEl.textContent = this.currentIndex + 1;
+            }
+
+            markUnknown() {
+                if (!this.isTestActive || this.showingPinyin) return;
+
+                this.unknownCount++;
+                this.showingPinyin = true;
+
+                // Show pinyin and change colors to red
+                this.characterPinyin.classList.add('show');
+                this.currentCharacter.classList.add('unknown');
+                this.characterPinyin.classList.add('unknown');
+
+                // Auto advance after 3 seconds
+                setTimeout(() => {
+                    this.nextCharacter();
+                }, 3500);
+            }
+
+            markKnown() {
+                if (!this.isTestActive || this.showingPinyin) return;
+
+                this.knownCount++;
+                this.knownCountEl.textContent = this.knownCount;
+                this.nextCharacter();
+            }
+
+            nextCharacter() {
+                this.showingPinyin = false;
+                this.currentIndex++;
+                
+                // Immediately hide pinyin and reset colors for smooth transition
+                this.characterPinyin.classList.remove('show');
+                this.currentCharacter.classList.remove('unknown');
+                this.characterPinyin.classList.remove('unknown');
+                
+                this.updateProgress();
+                this.showCurrentCharacter();
+            }
+
+            updateProgress() {
+                const progress = (this.currentIndex / this.testSize) * 100;
+                this.progressFill.style.width = `${progress}%`;
+            }
+
+            showResults() {
+                this.isTestActive = false;
+                this.testInterface.style.display = 'none';
+                this.resultScreen.style.display = 'block';
+
+                // Calculate and display results
+                const accuracyRate = Math.round((this.knownCount / this.testSize) * 100);
+                
+                document.getElementById('finalKnown').textContent = this.knownCount;
+                document.getElementById('finalUnknown').textContent = this.unknownCount;
+                document.getElementById('accuracyRate').textContent = `${accuracyRate}%`;
+            }
+
+            restartTest() {
+                this.resultScreen.style.display = 'none';
+                this.startScreen.style.display = 'block';
+                
+                // Reset all states
+                this.currentIndex = 0;
+                this.knownCount = 0;
+                this.unknownCount = 0;
+                this.isTestActive = false;
+                this.showingPinyin = false;
+                
+                // Reset UI elements
+                this.knownCountEl.textContent = '0';
+                this.progressFill.style.width = '0%';
+                this.currentIndexEl.textContent = '1';
+                
+                // Clear character display
+                this.currentCharacter.textContent = '';
+                this.characterPinyin.textContent = '';
+                this.characterPinyin.classList.remove('show');
+                this.currentCharacter.classList.remove('unknown');
+                this.characterPinyin.classList.remove('unknown');
+            }
+        }
+
+        // Initialize the test when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChineseCharacterTest();
+        });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLEGE8SN1C"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-JLEGE8SN1C');
+    </script>
+</body>
+</html>
