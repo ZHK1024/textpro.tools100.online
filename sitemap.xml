@@ -7,16 +7,16 @@
     <!-- Homepage / Chinese Character Counter Tool -->
     <url>
         <loc>https://textpro.tools100.online/</loc>
-        <lastmod>2025-08-12</lastmod>
+        <lastmod>2025-08-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://textpro.tools100.online/chinese-character-test.html</loc>
-        <lastmod>2025-08-12</lastmod>
+        <loc>https://textpro.tools100.online/chinese-characters-test.html</loc>
+        <lastmod>2025-08-25</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
+        <priority>0.8</priority>
     </url>
 
 </urlset>
